@@ -491,20 +491,10 @@ svg {
   font-weight: 500;
 }
 
-.hero-actions,
-.trust-row {
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.trust-row span {
-  padding: 10px 14px;
-  border: 1px solid rgba(47, 127, 70, 0.22);
-  border-radius: 999px;
-  background: rgba(255, 253, 247, 0.62);
-  color: var(--muted);
-  font-weight: 680;
 }
 
 .hero-stats {
@@ -1979,7 +1969,25 @@ svg {
 
   .hero {
     min-height: auto;
-    padding-top: 42px;
+    padding-top: 28px;
+    padding-bottom: 8px;
+  }
+
+  /* на мобилке убираем тяжёлое фото — суть и кнопки сразу в зоне видимости */
+  .hero-card {
+    display: none;
+  }
+
+  .hero-copy {
+    gap: 16px;
+  }
+
+  .hero-text {
+    font-size: 1.05rem;
+  }
+
+  .hero-actions {
+    margin-top: 6px;
   }
 
   .product-window {
@@ -2414,7 +2422,8 @@ svg {
 
 @media (max-width: 680px) {
   .hero h1 {
-    font-size: clamp(2.35rem, 10vw, 4rem);
+    font-size: clamp(2.1rem, 8.4vw, 3.2rem);
+    line-height: 1.1;
   }
 
   .rag-card {
