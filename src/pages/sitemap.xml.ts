@@ -1,6 +1,6 @@
 import { site } from "@/data/site";
 
-const pages = ["", "thank-you/", "privacy/", "offer/"];
+const pages = ["", "contacts/", "privacy/", "offer/", "refund/", "cookies/"];
 
 export function GET() {
   const urls = pages
