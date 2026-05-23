@@ -30,11 +30,13 @@ const quests = [
 ---
 
 <section class="section quest-section">
-  <SectionHeading
-    eyebrow="Геймификация без воды"
-    title="30 дней как квест: каждый шаг — готовый результат, а не галочка"
-    text="Никаких бейджей ради бейджей. Прошёл уровень — получил промты, прокачанное CV или план. Видно, куда двигаешься."
-  />
+  <div class="quest-heading-panel">
+    <SectionHeading
+      eyebrow="Геймификация без воды"
+      title="30 дней как квест: каждый шаг — готовый результат, а не галочка"
+      text="Никаких бейджей ради бейджей. Прошёл уровень — получил промты, прокачанное CV или план. Видно, куда двигаешься."
+    />
+  </div>
   <div class="quest-board reveal">
     <div class="quest-line" aria-hidden="true"></div>
     {quests.map((quest) => (
