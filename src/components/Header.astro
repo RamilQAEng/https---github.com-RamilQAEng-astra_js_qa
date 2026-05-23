@@ -15,12 +15,80 @@ const homePath = Astro.url.pathname === "/" ? "" : "/";
       <em>practice kit</em>
     </span>
   </a>
-  <nav aria-label="Основная навигация">
+
+  <nav class="desktop-nav" aria-label="Основная навигация">
     {navigation.map((item) => <a href={`${homePath}${item.href}`}>{item.label}</a>)}
   </nav>
+
   <div class="header-actions">
     <a class="social-link" href={site.telegramUrl} aria-label="Telegram">TG</a>
     <a class="social-link" href={site.vkUrl} aria-label="VK">VK</a>
     <a class="header-cta" href="#pricing">Выбрать гайд</a>
   </div>
+
+  <button
+    class="burger"
+    type="button"
+    aria-label="Открыть меню"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    data-burger
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+  <button class="mobile-menu-backdrop" type="button" aria-label="Закрыть меню" data-menu-close></button>
+  <nav class="mobile-menu-panel" aria-label="Мобильная навигация">
+    {navigation.map((item) => (
+      <a href={`${homePath}${item.href}`} data-menu-link>{item.label}</a>
+    ))}
+    <a class="mobile-menu-cta" href="#pricing" data-menu-link>Выбрать гайд</a>
+    <div class="mobile-menu-social">
+      <a href={site.telegramUrl} aria-label="Telegram">Telegram</a>
+      <a href={site.vkUrl} aria-label="VK">VK</a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+
+  if (burger && menu) {
+    const links = menu.querySelectorAll<HTMLElement>("[data-menu-link]");
+    const closeEls = menu.querySelectorAll<HTMLElement>("[data-menu-close]");
+
+    const open = () => {
+      menu.hidden = false;
+      // следующий кадр — чтобы сработала transition
+      requestAnimationFrame(() => menu.classList.add("is-open"));
+      burger.classList.add("is-active");
+      burger.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    };
+
+    const close = () => {
+      menu.classList.remove("is-open");
+      burger.classList.remove("is-active");
+      burger.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+      // прячем после анимации
+      window.setTimeout(() => {
+        if (!menu.classList.contains("is-open")) menu.hidden = true;
+      }, 320);
+    };
+
+    const toggle = () => (menu.classList.contains("is-open") ? close() : open());
+
+    burger.addEventListener("click", toggle);
+    links.forEach((el) => el.addEventListener("click", close));
+    closeEls.forEach((el) => el.addEventListener("click", close));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("is-open")) close();
+    });
+  }
+</script>

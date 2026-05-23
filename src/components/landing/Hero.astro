@@ -1,4 +1,5 @@
 ---
+import { leadMagnet, offers } from "@/data/site";
 ---
 
 <section class="hero section" id="top">
@@ -9,15 +10,23 @@
   </div>
   <div class="hero-copy reveal">
     <p class="eyebrow">AI для QA • практический набор</p>
-    <h1>QA-специалисту нужен AI-набор, а не ещё один “курс обо всём”.</h1>
+    <h1>Что делать QA, пока AI забирает рутину тестировщика</h1>
     <p class="hero-text">
-      Рабочий комплект для тестировщика: PDF-гайд, 25 промтов, RAG-диагностика,
-      шаблоны CV и roadmap на 30 дней. Без мотивационной воды, с фокусом на
-      требования, test cases, баг-репорты, тестовые данные и собеседования.
+      Не жди, пока AI обгонит — научись им управлять. Готовый набор: 25 промтов,
+      PDF-гайд, шаблоны CV и план на 30 дней. Ускоряй требования, test cases,
+      баг-репорты и готовься к интервью уже сегодня. Без курсов на полгода.
     </p>
     <div class="hero-actions">
-      <a class="button primary" href="#pricing">Получить гайд от 990 ₽</a>
-      <a class="button ghost" href="#inside">Посмотреть состав</a>
+      <a
+        class="button primary"
+        href="#pricing"
+        data-goal="paid_tariff_full"
+      >
+        Забрать полный набор — {offers[0].price}
+      </a>
+      <a class="button ghost" href={leadMagnet.href} data-goal={leadMagnet.goalId} download>
+        Сначала бесплатный мини-гайд →
+      </a>
     </div>
     <div class="trust-row" aria-label="Ключевые преимущества">
       <span>Для manual и junior QA</span>
@@ -25,30 +34,23 @@
       <span>Roadmap на 30 дней</span>
     </div>
   </div>
-  <div class="hero-card reveal delay-1" aria-label="Превью продукта">
-    <div class="product-window clean-window">
-      <div class="product-label">AI QA kit</div>
-      <div class="window-bar">
-        <span></span><span></span><span></span>
+  <div class="hero-card human-hero-card reveal delay-1" aria-label="AI QA набор и авторский подход">
+    <div class="human-visual">
+      <img
+        src="/images/hero-qa-specialist.jpg"
+        alt="QA-специалист использует AI-инструменты в работе"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div class="hero-level-card">
+        <span>Level 01</span>
+        <strong>AI QA старт</strong>
+        <p>25 промтов + roadmap</p>
       </div>
-      <div class="kit-card-main">
-        <span>PDF + PROMPTS</span>
-        <strong>AI для QA: 30 дней практики</strong>
-        <p>Гайд, промты, CV-шаблоны и карта навыков в одном комплекте.</p>
-      </div>
-      <div class="kit-list">
-        <div>
-          <span>01</span>
-          <p>Test cases и edge cases</p>
-        </div>
-        <div>
-          <span>02</span>
-          <p>Bug reports и требования</p>
-        </div>
-        <div>
-          <span>03</span>
-          <p>CV, интервью и roadmap</p>
-        </div>
+      <div class="pixel-orbit" aria-hidden="true">
+        <img src="/images/pixel-robot.svg" alt="" />
+        <img src="/images/pixel-trophy.svg" alt="" />
       </div>
     </div>
   </div>

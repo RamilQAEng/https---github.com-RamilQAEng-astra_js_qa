@@ -1,0 +1,49 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+
+const quests = [
+  {
+    level: "01",
+    title: "Разобрать риск",
+    text: "Понять, какие QA-задачи AI ускоряет, а где его ответ нужно проверять вручную.",
+    icon: "/images/pixel-robot.svg",
+  },
+  {
+    level: "02",
+    title: "Собрать промты",
+    text: "Забрать шаблоны для test cases, bug reports, требований, API и регресса.",
+    icon: "/images/pixel-scroll.svg",
+  },
+  {
+    level: "03",
+    title: "Упаковать CV",
+    text: "Показать AI-навыки без фальши: через рабочие сценарии, инструменты и результаты.",
+    icon: "/images/pixel-cv.svg",
+  },
+  {
+    level: "04",
+    title: "Пройти roadmap",
+    text: "30 дней короткой практики вместо хаотичного изучения всех AI-инструментов подряд.",
+    icon: "/images/pixel-trophy.svg",
+  },
+];
+---
+
+<section class="section quest-section">
+  <SectionHeading
+    eyebrow="Геймификация без воды"
+    title="30 дней как квест: каждый шаг — готовый результат, а не галочка"
+    text="Никаких бейджей ради бейджей. Прошёл уровень — получил промты, прокачанное CV или план. Видно, куда двигаешься."
+  />
+  <div class="quest-board reveal">
+    <div class="quest-line" aria-hidden="true"></div>
+    {quests.map((quest) => (
+      <article class="quest-card">
+        <img src={quest.icon} alt="" loading="lazy" />
+        <span>Level {quest.level}</span>
+        <h3>{quest.title}</h3>
+        <p>{quest.text}</p>
+      </article>
+    ))}
+  </div>
+</section>

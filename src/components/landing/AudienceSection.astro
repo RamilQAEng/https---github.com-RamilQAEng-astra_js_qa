@@ -1,10 +1,5 @@
 ---
-const audience = [
-  "Ты QA и чувствуешь, что рынок стал жёстче.",
-  "Ты хочешь зайти в тестирование, но не хочешь учиться вслепую.",
-  "Ты уже используешь ChatGPT, но пока хаотично.",
-  "Ты хочешь обновить CV под вакансии, где ценят AI-инструменты.",
-];
+import { audience, audienceNot } from "@/data/site";
 ---
 
 <section class="section split-section">
@@ -16,6 +11,12 @@ const audience = [
     {audience.map((item) => (
       <div class="check-item reveal">
         <span>✓</span>
+        <p>{item}</p>
+      </div>
+    ))}
+    {audienceNot.map((item) => (
+      <div class="check-item reveal is-negative">
+        <span>✕</span>
         <p>{item}</p>
       </div>
     ))}
