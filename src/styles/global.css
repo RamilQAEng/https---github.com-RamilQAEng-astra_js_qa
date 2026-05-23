@@ -300,13 +300,16 @@ svg {
 .burger {
   display: none;
   position: relative;
+  z-index: 60; /* поверх меню — крестик всегда кликается */
   width: 46px;
   height: 46px;
   padding: 0;
   border: 1px solid rgba(47, 127, 70, 0.24);
   border-radius: 14px;
-  background: rgba(255, 253, 247, 0.78);
+  background: rgba(255, 253, 247, 0.92);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .burger span {
@@ -341,15 +344,27 @@ svg {
   transform: translateX(-50%) rotate(-45deg);
 }
 
-/* Выезжающее мобильное меню */
+/* Выезжающее мобильное меню — скрыто по умолчанию, открыто через body.menu-open */
 .mobile-menu {
   position: fixed;
   inset: 0;
   z-index: 50;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .mobile-menu[hidden] {
   display: none;
+}
+
+body.menu-open .mobile-menu {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* блокируем прокрутку фона при открытом меню */
+body.menu-open {
+  overflow: hidden;
 }
 
 .mobile-menu-backdrop {
@@ -365,7 +380,7 @@ svg {
   cursor: pointer;
 }
 
-.mobile-menu.is-open .mobile-menu-backdrop {
+body.menu-open .mobile-menu-backdrop {
   opacity: 1;
 }
 
@@ -378,15 +393,16 @@ svg {
   gap: 6px;
   width: min(82vw, 340px);
   height: 100%;
-  padding: 90px 24px 32px;
+  padding: 88px 24px 32px;
   background: var(--paper, #fffdf7);
   box-shadow: -20px 0 60px rgba(23, 25, 23, 0.18);
   transform: translateX(100%);
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.mobile-menu.is-open .mobile-menu-panel {
+body.menu-open .mobile-menu-panel {
   transform: translateX(0);
 }
 
@@ -396,6 +412,7 @@ svg {
   color: var(--text);
   font-size: 1.15rem;
   font-weight: 700;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-menu-panel a:active {
@@ -658,15 +675,19 @@ svg {
 }
 
 .pain-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
 }
 
 .dark-card {
+  position: relative;
   display: flex;
-  min-height: 260px;
+  min-height: 220px;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 26px;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 28px;
   border: 1px solid rgba(143, 207, 154, 0.32);
   border-radius: var(--radius);
   background: var(--dark);
@@ -674,6 +695,26 @@ svg {
   transition:
     transform 180ms ease,
     border-color 180ms ease;
+}
+
+/* стрелка-связка между карточками: 1 → 2 → 3 */
+.pain-grid .dark-card:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: -18px;
+  z-index: 2;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  transform: translate(50%, -50%);
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(238, 107, 58, 0.32);
 }
 
 .dark-card:hover,
@@ -814,18 +855,6 @@ svg {
   transition: transform 180ms ease;
 }
 
-.content-card::after {
-  content: "";
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
-  width: 132px;
-  height: 88px;
-  border: 1px solid rgba(143, 207, 154, 0.34);
-  border-radius: 20px;
-  background: rgba(255, 253, 247, 0.08);
-}
-
 .content-card span {
   color: var(--green);
   font-weight: 750;
@@ -836,7 +865,8 @@ svg {
 }
 
 .content-card p {
-  max-width: 520px;
+  max-width: 460px;
+  padding-right: 40px; /* воздух у стрелки-ссылки в углу */
   color: rgba(255, 253, 247, 0.76);
 }
 
@@ -2184,6 +2214,14 @@ svg {
     min-height: auto;
   }
 
+  /* стрелка-связка Pain на мобилке: указывает вниз, между карточками */
+  .pain-grid .dark-card:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -18px;
+    transform: translate(50%, 50%) rotate(90deg);
+  }
+
   /* карточки "что внутри" на мобилке: чище, без декора, текст на всю ширину */
   .content-card {
     gap: 14px;
@@ -2911,7 +2949,10 @@ svg {
   width: 68px;
   height: 68px;
   margin-bottom: 12px;
+  padding: 12px;
   border-radius: 18px;
+  background: var(--dark);
+  object-fit: contain;
 }
 
 .content-card {
@@ -2961,15 +3002,13 @@ svg {
   background: rgba(255, 253, 247, 0.92);
 }
 
-.quest-card:nth-child(3),
-.quest-card:nth-child(5) {
-  transform: translateY(24px);
-}
-
 .quest-card img {
   width: 62px;
   height: 62px;
+  padding: 11px;
   border-radius: 17px;
+  background: var(--dark);
+  object-fit: contain;
 }
 
 .quest-card span {
@@ -3196,9 +3235,8 @@ svg {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .quest-card:nth-child(3),
-  .quest-card:nth-child(5) {
-    transform: none;
+  .quest-card {
+    min-height: auto;
   }
 
   .free-guide-card {

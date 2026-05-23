@@ -54,23 +54,34 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
     <a class="back-to-top" href="#top" aria-label="Наверх">↑</a>
     <script>
       const revealItems = document.querySelectorAll(".reveal");
+      const show = (el) => el.classList.add("is-visible");
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
+                show(entry.target);
                 observer.unobserve(entry.target);
               }
             });
           },
-          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" },
+          // появляться как только край блока вошёл в экран — порог 0,
+          // чтобы высокие карточки на мобилке не застревали невидимыми
+          { threshold: 0, rootMargin: "0px 0px -40px 0px" },
         );
 
         revealItems.forEach((item) => observer.observe(item));
+
+        // страховка: всё, что уже в зоне видимости при загрузке — показать сразу
+        requestAnimationFrame(() => {
+          revealItems.forEach((item) => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < window.innerHeight) show(item);
+          });
+        });
       } else {
-        revealItems.forEach((item) => item.classList.add("is-visible"));
+        revealItems.forEach(show);
       }
     </script>
   </body>
