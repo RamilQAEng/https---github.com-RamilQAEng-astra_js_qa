@@ -1,0 +1,46 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+
+const items = [
+  {
+    title: "PDF-гайд",
+    meta: "25+ страниц",
+    text: "Что AI уже делает в QA, какие задачи останутся за человеком и как перестроить рабочий профиль.",
+  },
+  {
+    title: "Промты",
+    meta: "25 шаблонов",
+    text: "Тест-кейсы, баг-репорты, автотесты, анализ требований, подготовка к собеседованию.",
+  },
+  {
+    title: "CV и письмо",
+    meta: "2 шаблона",
+    text: "Как показать опыт через язык AI QA, даже если ты пока не automation engineer.",
+  },
+  {
+    title: "Roadmap",
+    meta: "30 дней",
+    text: "Что учить junior, middle и manual QA, чтобы не распыляться на случайные инструменты.",
+  },
+];
+---
+
+<section class="section" id="inside">
+  <SectionHeading
+    eyebrow="Что внутри"
+    title="Не курс на полгода, а набор, который можно открыть и применить сегодня"
+    text="Продукт сделан как быстрый рабочий пакет: прочитал, забрал промты, обновил CV, пошёл применять."
+  />
+  <div class="inside-grid">
+    {items.map((item) => (
+      <article class="content-card reveal">
+        <div>
+          <span>{item.meta}</span>
+          <h3>{item.title}</h3>
+        </div>
+        <p>{item.text}</p>
+        <a href="#pricing" aria-label={`Выбрать тариф для ${item.title}`}>↗</a>
+      </article>
+    ))}
+  </div>
+</section>

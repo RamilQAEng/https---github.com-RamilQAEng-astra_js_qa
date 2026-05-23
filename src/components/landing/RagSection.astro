@@ -1,0 +1,26 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import { ragMetrics } from "@/data/site";
+---
+
+<section class="section rag-section" id="rag">
+  <SectionHeading
+    eyebrow="RAG-диагностика"
+    title="Показываем не только “что почитать”, а где QA сейчас находится по AI-навыкам"
+    text="RAG здесь простой: Red, Amber, Green. Это способ понять, где риск, где переходная зона, а где уже рабочая система применения AI в тестировании."
+  />
+  <div class="rag-grid">
+    {ragMetrics.map((item) => (
+      <article class:list={["rag-card reveal", item.status]}>
+        <div class="rag-top">
+          <span>{item.label}</span>
+          <h3>{item.title}</h3>
+        </div>
+        <p>{item.text}</p>
+        <div class="key-list" aria-label={`Ключи ${item.label}`}>
+          {item.keys.map((key) => <small>{key}</small>)}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

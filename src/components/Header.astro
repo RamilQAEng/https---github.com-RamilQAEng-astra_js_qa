@@ -1,0 +1,26 @@
+---
+import { navigation, site } from "@/data/site";
+
+const homePath = Astro.url.pathname === "/" ? "" : "/";
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="На главную">
+    <span class="brand-mark" aria-hidden="true">
+      <span>QA</span>
+      <i></i>
+    </span>
+    <span class="brand-word">
+      <strong>QA<span>AI</span></strong>
+      <em>practice kit</em>
+    </span>
+  </a>
+  <nav aria-label="Основная навигация">
+    {navigation.map((item) => <a href={`${homePath}${item.href}`}>{item.label}</a>)}
+  </nav>
+  <div class="header-actions">
+    <a class="social-link" href={site.telegramUrl} aria-label="Telegram">TG</a>
+    <a class="social-link" href={site.vkUrl} aria-label="VK">VK</a>
+    <a class="header-cta" href="#pricing">Выбрать гайд</a>
+  </div>
+</header>

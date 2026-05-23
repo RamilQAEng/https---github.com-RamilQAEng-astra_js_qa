@@ -1,0 +1,23 @@
+---
+const audience = [
+  "Ты QA и чувствуешь, что рынок стал жёстче.",
+  "Ты хочешь зайти в тестирование, но не хочешь учиться вслепую.",
+  "Ты уже используешь ChatGPT, но пока хаотично.",
+  "Ты хочешь обновить CV под вакансии, где ценят AI-инструменты.",
+];
+---
+
+<section class="section split-section">
+  <div class="split-copy reveal">
+    <p class="eyebrow">Для кого</p>
+    <h2>Для тех, кто хочет трезвый план, а не мотивационный плакат</h2>
+  </div>
+  <div class="check-list">
+    {audience.map((item) => (
+      <div class="check-item reveal">
+        <span>✓</span>
+        <p>{item}</p>
+      </div>
+    ))}
+  </div>
+</section>

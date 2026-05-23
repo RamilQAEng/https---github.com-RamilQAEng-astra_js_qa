@@ -1,0 +1,32 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import { cases, testimonials } from "@/data/site";
+---
+
+<section class="section" id="proof">
+  <SectionHeading
+    eyebrow="Кейсы и отзывы"
+    title="Показываем пользу через ситуации, а не через громкие обещания"
+    text="Это демонстрационные сценарии и отзывы для упаковки лендинга. Перед запуском лучше заменить их на реальные истории покупателей."
+  />
+  <div class="case-grid">
+    {cases.map((item) => (
+      <article class="case-card reveal">
+        <span>{item.role}</span>
+        <h3>{item.title}</h3>
+        <p>{item.result}</p>
+      </article>
+    ))}
+  </div>
+  <div class="testimonial-row">
+    {testimonials.map((item) => (
+      <article class="testimonial-card reveal">
+        <p>“{item.text}”</p>
+        <div>
+          <strong>{item.name}</strong>
+          <span>{item.role}</span>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

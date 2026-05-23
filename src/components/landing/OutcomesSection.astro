@@ -1,0 +1,21 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import { outcomes } from "@/data/site";
+---
+
+<section class="section outcomes-section">
+  <SectionHeading
+    eyebrow="Что изменится после"
+    title="Не просто “почитал про AI”, а собрал рабочую систему для QA-задач"
+    text="Гайд не заменяет опыт и практику, но помогает быстрее понять, что именно внедрять в работу и как показать это работодателю."
+  />
+  <div class="outcomes-grid">
+    {outcomes.map((item) => (
+      <article class="outcome-card reveal">
+        <span>{item.metric}</span>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </article>
+    ))}
+  </div>
+</section>

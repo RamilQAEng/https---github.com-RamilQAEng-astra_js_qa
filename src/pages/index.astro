@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Hero from "@/components/landing/Hero.astro";
+import PainSection from "@/components/landing/PainSection.astro";
+import OutcomesSection from "@/components/landing/OutcomesSection.astro";
+import RagSection from "@/components/landing/RagSection.astro";
+import AudienceSection from "@/components/landing/AudienceSection.astro";
+import InsideSection from "@/components/landing/InsideSection.astro";
+import TestCasesSection from "@/components/landing/TestCasesSection.astro";
+import ProgramSection from "@/components/landing/ProgramSection.astro";
+import CasesSection from "@/components/landing/CasesSection.astro";
+import SeoContentSection from "@/components/landing/SeoContentSection.astro";
+import TrustSection from "@/components/landing/TrustSection.astro";
+import PricingSection from "@/components/landing/PricingSection.astro";
+import FaqSection from "@/components/landing/FaqSection.astro";
+import FinalCta from "@/components/landing/FinalCta.astro";
+import SoftCta from "@/components/landing/SoftCta.astro";
+---
+
+<BaseLayout>
+  <Header />
+  <main>
+    <Hero />
+    <PainSection />
+    <OutcomesSection />
+    <RagSection />
+    <SoftCta />
+    <AudienceSection />
+    <InsideSection />
+    <TestCasesSection />
+    <ProgramSection />
+    <CasesSection />
+    <SeoContentSection />
+    <TrustSection />
+    <PricingSection />
+    <SoftCta
+      title="Если нужен прогрев перед покупкой — забери бесплатные разборы в канал."
+      text="Там можно посмотреть стиль материалов, примеры промтов и понять, подходит ли тебе подход QA x AI."
+    />
+    <FaqSection />
+    <FinalCta />
+  </main>
+  <Footer />
+</BaseLayout>

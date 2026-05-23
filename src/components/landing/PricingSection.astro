@@ -1,0 +1,29 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import { offers } from "@/data/site";
+---
+
+<section class="section" id="pricing">
+  <SectionHeading
+    eyebrow="Тарифы"
+    title="Выбери формат. Средний вариант собран как основной."
+    text="Дешёвый вход оставлен для пробы, но основной тариф — полный набор. Он лучше сходится с рекламой из Директа и даёт покупателю не только файлы, а понятную систему."
+  />
+  <div class="pricing-grid">
+    {offers.map((offer) => (
+      <article class:list={["price-card reveal", { highlighted: offer.highlighted }]}>
+        {offer.highlighted && <span class="badge">Рекомендуемый</span>}
+        <h3>{offer.name}</h3>
+        <p>{offer.description}</p>
+        <div class="price-line">
+          {offer.oldPrice && <span>{offer.oldPrice}</span>}
+          <strong>{offer.price}</strong>
+        </div>
+        <ul>
+          {offer.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+        <a class="button primary full" href={offer.paymentUrl}>{offer.cta}</a>
+      </article>
+    ))}
+  </div>
+</section>

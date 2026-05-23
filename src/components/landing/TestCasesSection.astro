@@ -1,0 +1,60 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+
+const cases = [
+  {
+    tag: "Checkout",
+    title: "Форма оплаты",
+    image: "payment",
+    prompt: "Найди positive, negative и boundary cases для оплаты картой.",
+    result: "Получаешь структуру проверок, риски, edge cases и список ручных проверок.",
+  },
+  {
+    tag: "API",
+    title: "Регистрация пользователя",
+    image: "api",
+    prompt: "Разбери OpenAPI endpoint и предложи test cases для валидации.",
+    result: "AI помогает быстро собрать проверки статусов, payload, ошибок и лимитов.",
+  },
+  {
+    tag: "Regression",
+    title: "Релизный регресс",
+    image: "board",
+    prompt: "Собери smoke/regression checklist по списку изменений релиза.",
+    result: "На выходе понятный checklist, приоритеты и зоны риска для QA.",
+  },
+];
+---
+
+<section class="section testcases-section" id="testcases">
+  <SectionHeading
+    eyebrow="Пример применения"
+    title="Не просто промты. Готовые сценарии, которые превращаются в тест-кейсы"
+    text="Под каждый сценарий можно добавить скрин продукта, макет, API-схему или кусок требования. Поэтому блок сразу рассчитан под реальные изображения."
+  />
+  <div class="testcase-showcase">
+    {cases.map((item, index) => (
+      <article class="testcase-card reveal" style={`--delay:${index * 100}ms`}>
+        <div class:list={["testcase-visual", item.image]}>
+          <div class="mock-window">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mock-content">
+            <i>{item.tag}</i>
+            <strong>{item.title}</strong>
+            <small>image slot</small>
+          </div>
+        </div>
+        <div class="testcase-copy">
+          <span>{item.tag}</span>
+          <h3>{item.title}</h3>
+          <div class="prompt-box">
+            <small>Prompt</small>
+            <p>{item.prompt}</p>
+          </div>
+          <p>{item.result}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

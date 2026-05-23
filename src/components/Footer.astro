@@ -1,0 +1,26 @@
+---
+import { site } from "@/data/site";
+---
+
+<footer class="site-footer">
+  <div>
+    <a class="brand footer-brand" href="/">
+      <span class="brand-mark" aria-hidden="true">
+        <span>QA</span>
+        <i></i>
+      </span>
+      <span class="brand-word">
+        <strong>QA<span>AI</span></strong>
+        <em>practice kit</em>
+      </span>
+    </a>
+    <p>Практичные AI-инструменты для тестировщиков без обещаний лёгких чудес.</p>
+  </div>
+  <div class="footer-links">
+    <a href="/privacy/">Политика</a>
+    <a href="/offer/">Оферта</a>
+    <a href={site.telegramUrl}>Telegram</a>
+    <a href={site.vkUrl}>VK</a>
+    <a href={`mailto:${site.supportEmail}`}>Поддержка</a>
+  </div>
+</footer>

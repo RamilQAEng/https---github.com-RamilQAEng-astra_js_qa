@@ -1,0 +1,48 @@
+---
+const tools = ["ChatGPT", "Copilot", "Playwright", "Postman", "DevTools", "GitHub"];
+
+const people = [
+  {
+    initials: "QA",
+    name: "Автор проекта",
+    role: "QA-практик и редактор гайда",
+    text: "Собирает материалы вокруг реальных задач: требования, тест-кейсы, баг-репорты, CV и собеседования.",
+  },
+  {
+    initials: "AI",
+    name: "AI-ассистент",
+    role: "Помощник в структуре и промтах",
+    text: "Помогает быстро собрать варианты промтов, но финальный смысл и проверка остаются за человеком.",
+  },
+];
+---
+
+<section class="section trust-section">
+  <div class="trust-panel reveal">
+    <div class="trust-head">
+      <p class="eyebrow">Доверие</p>
+      <h2>Проект выглядит личным: не “огромная команда”, а понятный авторский продукт</h2>
+      <p>
+        Для трипваера это честнее и сильнее. Покупатель видит, кто отвечает за материал,
+        и понимает, что продукт собран вокруг практики, а не вокруг красивой упаковки.
+      </p>
+    </div>
+    <div class="people-row">
+      {people.map((person) => (
+        <article class="person-card">
+          <div class="person-avatar">
+            <span>{person.initials}</span>
+          </div>
+          <div>
+            <h3>{person.name}</h3>
+            <strong>{person.role}</strong>
+            <p>{person.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="logo-cloud compact" aria-label="Инструменты и темы">
+      {tools.map((tool) => <span>{tool}</span>)}
+    </div>
+  </div>
+</section>

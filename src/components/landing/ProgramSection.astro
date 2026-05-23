@@ -1,0 +1,28 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import { program } from "@/data/site";
+---
+
+<section class="section soft" id="program">
+  <SectionHeading
+    eyebrow="Программа"
+    title="Состав продукта: что именно будет внутри после оплаты"
+    text="Каждый блок сделан под конкретную задачу QA: быстрее писать тестовую документацию, проверять требования, готовиться к собеседованию и понятнее показывать опыт."
+  />
+  <div class="program-wrap">
+    <div class="program-card reveal">
+      <p class="eyebrow">Состав PDF</p>
+      <ol>
+        {program.map((item) => <li>{item}</li>)}
+      </ol>
+    </div>
+    <aside class="seo-note reveal delay-1">
+      <h3>Ключевые темы</h3>
+      <p>
+        AI в тестировании, ChatGPT для QA, промты для тест-кейсов, bug reports,
+        требования, automation mindset, CV и подготовка к интервью.
+      </p>
+      <a class="button ghost" href="#pricing">Выбрать тариф</a>
+    </aside>
+  </div>
+</section>

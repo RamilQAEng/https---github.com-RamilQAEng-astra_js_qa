@@ -1,0 +1,25 @@
+---
+import { site } from "@/data/site";
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = "Не готов покупать сразу? Подпишись и посмотри материалы в канале.",
+  text = "В Telegram и VK будем публиковать промты, разборы QA-задач, заметки про AI-инструменты и обновления гайда.",
+} = Astro.props;
+---
+
+<section class="soft-cta reveal">
+  <div>
+    <p class="eyebrow">Мягкий вход</p>
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </div>
+  <div class="soft-cta-actions">
+    <a class="button primary" href={site.telegramUrl}>Подписаться в TG</a>
+    <a class="button ghost" href={site.vkUrl}>VK-сообщество</a>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+---
+import SectionHeading from "@/components/SectionHeading.astro";
+import { faq } from "@/data/site";
+---
+
+<section class="section soft" id="faq">
+  <SectionHeading
+    eyebrow="FAQ"
+    title="Коротко про сомнения перед покупкой"
+  />
+  <div class="faq-list">
+    {faq.map((item) => (
+      <details class="faq-item reveal">
+        <summary>{item.question}</summary>
+        <p>{item.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>
