@@ -3336,3 +3336,282 @@ body.menu-open .mobile-menu-panel {
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile deploy hardening: keep the first screen clean on 360-430px. */
+@media (max-width: 1100px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .site-header {
+    width: min(var(--max), calc(100% - 28px));
+    min-height: 64px;
+    padding: 10px 0;
+  }
+
+  .site-header .desktop-nav,
+  .site-header .header-actions {
+    display: none !important;
+  }
+
+  .burger {
+    display: block;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+  }
+
+  .brand-word {
+    min-width: 0;
+  }
+
+  .hero {
+    grid-template-columns: 1fr !important;
+    gap: 0;
+    width: min(100% - 28px, var(--max));
+    padding-top: clamp(32px, 9vw, 56px);
+    padding-bottom: 34px;
+  }
+
+  .hero-card,
+  .hero-backdrop {
+    display: none;
+  }
+
+  .hero-copy {
+    gap: 18px;
+    min-width: 0;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .hero .button {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-header {
+    width: calc(100% - 24px);
+  }
+
+  .brand-word strong {
+    font-size: 1.08rem;
+  }
+
+  .brand-word em {
+    font-size: 0.52rem;
+  }
+
+  .burger {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .section,
+  .hero {
+    width: min(100% - 24px, var(--max));
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .hero h1 {
+    max-width: 11ch;
+    font-size: clamp(2.42rem, 11vw, 3.05rem);
+    line-height: 1.02;
+  }
+
+  .hero-text {
+    max-width: 32rem;
+    font-size: 1.02rem;
+    line-height: 1.5;
+  }
+
+  .button {
+    min-height: 50px;
+    padding: 0 18px;
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+
+  .pain-grid,
+  .inside-grid,
+  .outcomes-grid,
+  .case-grid,
+  .testimonial-row,
+  .rag-grid,
+  .quest-board,
+  #pricing .pricing-grid,
+  .faq-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dark-card,
+  .content-card,
+  .outcome-card,
+  .rag-card,
+  .case-card,
+  .testimonial-card,
+  .price-card,
+  .program-card,
+  .seo-note,
+  .faq-item,
+  .check-item {
+    border-radius: 22px;
+  }
+
+  .mobile-menu-panel {
+    width: min(88vw, 340px);
+    padding: 82px 18px 24px;
+  }
+}
+
+@media (max-width: 390px) {
+  .brand-word em {
+    display: none;
+  }
+
+  .hero h1 {
+    max-width: 10.5ch;
+    font-size: clamp(2.25rem, 10.5vw, 2.75rem);
+  }
+
+  .button {
+    padding-right: 14px;
+    padding-left: 14px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile menu polish: the header is the moving/sticky part, not the drawer. */
+@media (max-width: 1100px) {
+  .site-header {
+    position: fixed;
+    top: 0;
+    right: 14px;
+    left: 14px;
+    z-index: 80;
+    width: auto;
+    transition:
+      background-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  body {
+    padding-top: 64px;
+  }
+
+  body.menu-open .site-header {
+    background: rgba(255, 253, 247, 0.96);
+    box-shadow: 0 14px 36px rgba(23, 25, 23, 0.12);
+  }
+
+  body.menu-open .burger {
+    border-color: rgba(47, 127, 70, 0.34);
+    background: var(--dark);
+  }
+
+  body.menu-open .burger span {
+    background: var(--paper);
+  }
+
+  .mobile-menu {
+    z-index: 70;
+  }
+
+  .mobile-menu-backdrop {
+    background: rgba(23, 25, 23, 0.5);
+    backdrop-filter: blur(3px);
+  }
+
+  .mobile-menu-panel {
+    top: 0;
+    right: 0;
+    width: min(88vw, 390px);
+    height: 100dvh;
+    padding: 96px 18px 24px;
+    border: 0;
+    border-radius: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 253, 247, 0.98), rgba(255, 253, 247, 0.94)),
+      var(--paper);
+    box-shadow: 0 24px 70px rgba(23, 25, 23, 0.22);
+  }
+
+  .mobile-menu-panel a {
+    padding: 16px 18px;
+    border-radius: 18px;
+    font-size: 1.08rem;
+  }
+
+  .mobile-menu-panel a:hover,
+  .mobile-menu-panel a:focus-visible {
+    background: rgba(143, 207, 154, 0.15);
+    outline: none;
+  }
+
+  .mobile-menu-cta {
+    min-height: 56px;
+    margin-top: 12px;
+    border-radius: 16px !important;
+  }
+
+  .mobile-menu-social {
+    margin-top: auto;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-header {
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+
+  body {
+    padding-top: 62px;
+  }
+
+  .mobile-menu-panel {
+    top: 0;
+    right: 0;
+    width: min(88vw, 360px);
+    height: 100dvh;
+    padding: 90px 16px 20px;
+  }
+}

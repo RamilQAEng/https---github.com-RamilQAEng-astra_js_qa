@@ -68,12 +68,14 @@ const homePath = Astro.url.pathname === "/" ? "" : "/";
       document.body.classList.add("menu-open");
       burger.classList.add("is-active");
       burger.setAttribute("aria-expanded", "true");
+      burger.setAttribute("aria-label", "Закрыть меню");
     };
 
     const close = () => {
       document.body.classList.remove("menu-open");
       burger.classList.remove("is-active");
       burger.setAttribute("aria-expanded", "false");
+      burger.setAttribute("aria-label", "Открыть меню");
     };
 
     const toggle = (e: Event) => {
