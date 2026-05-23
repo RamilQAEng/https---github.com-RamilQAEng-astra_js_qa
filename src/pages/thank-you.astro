@@ -5,8 +5,8 @@ import Footer from "@/components/Footer.astro";
 import { site } from "@/data/site";
 
 const nextSteps = [
-  "Скачай материалы и сохрани ссылку.",
-  "Открой roadmap и отметь свой текущий уровень.",
+  "Скачай материалы и сохрани ссылку на набор.",
+  "Открой roadmap и отметь первый шаг на сегодня.",
   "Подпишись на TG/VK: туда будем выкладывать обновления и разборы.",
 ];
 ---
@@ -27,6 +27,9 @@ const nextSteps = [
             Скачай материалы сейчас. Ссылку также лучше сохранить: если что-то не откроется,
             напиши в поддержку, и мы продублируем доступ.
           </p>
+          <p class="thank-note">
+            Котик уже принял оплату, поднял чек-лист и желает спокойных релизов.
+          </p>
           <div class="hero-actions">
             <a class="button primary" href="/downloads/ai-qa-guide-sample.pdf" download>Скачать материалы</a>
             <a class="button ghost" href="/">На главную</a>
@@ -35,10 +38,17 @@ const nextSteps = [
         </div>
 
         <div class="thank-side">
-          <div class="download-ticket">
-            <span>Access</span>
-            <strong>AI QA Kit</strong>
-            <p>PDF • промты • roadmap • CV</p>
+          <div class="thank-mascot">
+            <img
+              src="/images/pixel-cat-mascot-note-v1.webp"
+              alt="Пиксельный котик с чек-листом желает успеха после покупки AI QA набора"
+              loading="eager"
+              decoding="async"
+            />
+            <div class="thank-mascot-label">
+              <span>AI QA Kit</span>
+              <strong>PDF • промты • roadmap • CV</strong>
+            </div>
           </div>
           <div class="mini-steps">
             {nextSteps.map((step, index) => (
