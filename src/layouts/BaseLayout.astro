@@ -52,6 +52,19 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
   <body>
     <slot />
     <a class="back-to-top" href="#top" aria-label="Наверх">↑</a>
+    <div class="cookie-banner" data-cookie-banner hidden>
+      <div>
+        <strong>Cookies и аналитика</strong>
+        <p>
+          Используем технические cookies/localStorage и аналитику, чтобы сайт работал стабильнее
+          и реклама не стреляла вслепую.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <a class="button ghost" href="/cookies/">Подробнее</a>
+        <button class="button primary" type="button" data-cookie-accept>Ок</button>
+      </div>
+    </div>
     <script>
       const revealItems = document.querySelectorAll(".reveal");
       const show = (el) => el.classList.add("is-visible");
@@ -83,6 +96,19 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
       } else {
         revealItems.forEach(show);
       }
+
+      const cookieBanner = document.querySelector("[data-cookie-banner]");
+      const cookieAccept = document.querySelector("[data-cookie-accept]");
+      const cookieKey = "qaai_cookie_notice_accepted";
+
+      if (cookieBanner && localStorage.getItem(cookieKey) !== "yes") {
+        cookieBanner.hidden = false;
+      }
+
+      cookieAccept?.addEventListener("click", () => {
+        localStorage.setItem(cookieKey, "yes");
+        if (cookieBanner) cookieBanner.hidden = true;
+      });
     </script>
   </body>
 </html>

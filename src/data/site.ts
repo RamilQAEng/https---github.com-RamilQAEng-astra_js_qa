@@ -7,6 +7,12 @@ export const site = {
   telegramUrl: "https://t.me/your_channel",
   vkUrl: "https://vk.com/your_community",
   supportEmail: "support@example.com",
+  seller: {
+    name: "ИП / самозанятый / ООО — заменить перед запуском",
+    inn: "ИНН — заменить",
+    ogrn: "ОГРН/ОГРНИП — заменить, если применимо",
+    address: "Юридический адрес / регион — заменить",
+  },
 };
 
 export const navigation = [
@@ -43,7 +49,8 @@ export const offers = [
       "Роадмап на 30 дней",
     ],
     cta: "Купить за 4 990 ₽",
-    paymentUrl: "/thank-you/?plan=full",
+    checkoutUrl: "/checkout/?plan=full",
+    paymentUrl: "https://yookassa.ru/my/i/replace-full",
     goalId: "paid_tariff_full",
     highlighted: true,
   },
@@ -61,7 +68,8 @@ export const offers = [
       "Приоритетные ответы в TG",
     ],
     cta: "Взять PRO за 9 900 ₽",
-    paymentUrl: "/thank-you/?plan=pro",
+    checkoutUrl: "/checkout/?plan=pro",
+    paymentUrl: "https://yookassa.ru/my/i/replace-pro",
     goalId: "paid_tariff_pro",
   },
 ];

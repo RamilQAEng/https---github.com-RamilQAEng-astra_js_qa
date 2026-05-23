@@ -5,8 +5,8 @@ import Footer from "@/components/Footer.astro";
 import { site } from "@/data/site";
 
 const nextSteps = [
-  "Скачай материалы и сохрани ссылку на набор.",
-  "Открой roadmap и отметь первый шаг на сегодня.",
+  "Проверь email, который указал при оплате.",
+  "Сохрани письмо с доступом и открой roadmap.",
   "Подпишись на TG/VK: туда будем выкладывать обновления и разборы.",
 ];
 ---
@@ -24,16 +24,16 @@ const nextSteps = [
           <p class="eyebrow">Оплата прошла</p>
           <h1>Спасибо. Твой AI QA набор готов.</h1>
           <p>
-            Скачай материалы сейчас. Ссылку также лучше сохранить: если что-то не откроется,
-            напиши в поддержку, и мы продублируем доступ.
+            Если оплата прошла успешно, материалы придут на email, указанный при оплате.
+            Если письмо не появилось за 10 минут, напиши в поддержку — проверим заказ и продублируем доступ.
           </p>
           <p class="thank-note">
             Котик уже принял оплату, поднял чек-лист и желает спокойных релизов.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="/downloads/ai-qa-guide-sample.pdf" download>Скачать материалы</a>
+            <a class="button primary" href={`mailto:${site.supportEmail}`}>Написать в поддержку</a>
             <a class="button ghost" href="/">На главную</a>
-            <a class="button ghost" href={`mailto:${site.supportEmail}`}>Написать в поддержку</a>
+            <a class="button ghost" href={site.telegramUrl}>Telegram</a>
           </div>
         </div>
 
