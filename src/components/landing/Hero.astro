@@ -9,12 +9,13 @@ import { leadMagnet, offers } from "@/data/site";
     <span class="scan-line"></span>
   </div>
   <div class="hero-copy reveal">
-    <p class="eyebrow">AI для QA • практический набор</p>
-    <h1>Что делать QA, пока AI забирает рутину тестировщика</h1>
+    <p class="eyebrow">AI для QA • практический набор на 30 дней</p>
+    <h1>AI уже меняет QA. Научись использовать его раньше остальных</h1>
     <p class="hero-text">
-      Не жди, пока AI обгонит — научись им управлять. Готовый набор: 25 промтов,
-      PDF-гайд, шаблоны CV и план на 30 дней. Ускоряй требования, test cases,
-      баг-репорты и готовься к интервью уже сегодня. Без курсов на полгода.
+      Если ты manual QA, junior или уже работаешь в тестировании, но чувствуешь,
+      что AI и automation уходят вперёд — начни с понятного плана. За 30 дней
+      разберёшься, где AI помогает QA, как проверять его ответы и как собрать
+      практический проект для портфолио или работы.
     </p>
     <div class="mobile-hero-kit" aria-label="Что внутри AI QA набора">
       <div class="mobile-hero-kit__head">
@@ -25,9 +26,9 @@ import { leadMagnet, offers } from "@/data/site";
         </div>
       </div>
       <div class="mobile-hero-kit__items">
-        <span>PDF-гайд</span>
-        <span>25 промтов</span>
-        <span>CV под AI QA</span>
+        <span>AI в работе</span>
+        <span>Первые проверки</span>
+        <span>Проект в портфолио</span>
       </div>
     </div>
     <div class="hero-actions">
@@ -36,10 +37,10 @@ import { leadMagnet, offers } from "@/data/site";
         href="#pricing"
         data-goal="paid_tariff_full"
       >
-        Забрать полный набор — {offers[0].price}
+        Получить план и практику — {offers[0].price}
       </a>
-      <a class="button ghost" href={leadMagnet.href} data-goal={leadMagnet.goalId} download>
-        Сначала бесплатный мини-гайд →
+      <a class="button ghost" href="#free-guide" data-goal={leadMagnet.goalId}>
+        Забрать гайд бесплатно
       </a>
     </div>
   </div>
@@ -54,7 +55,7 @@ import { leadMagnet, offers } from "@/data/site";
       <div class="hero-level-card">
         <span>Level 01</span>
         <strong>AI QA старт</strong>
-        <p>25 промтов + roadmap</p>
+        <p>план + практика + проект</p>
       </div>
       <div class="pixel-orbit" aria-hidden="true">
         <img src="/images/pixel-robot.svg" alt="" />

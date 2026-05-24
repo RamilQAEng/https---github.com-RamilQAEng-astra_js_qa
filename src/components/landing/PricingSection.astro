@@ -7,7 +7,7 @@ import { leadMagnet, offers } from "@/data/site";
   <SectionHeading
     eyebrow="Тарифы"
     title="Выбери формат"
-    text="Полный набор — для самостоятельной работы. PRO — если хочешь личный разбор CV и созвон."
+    text="Основной тариф — для самостоятельной практики. PRO — если хочешь личный разбор CV, проекта и следующих шагов."
   />
   <div class="pricing-grid">
     {offers.map((offer) => (
@@ -38,7 +38,7 @@ import { leadMagnet, offers } from "@/data/site";
       </article>
     ))}
   </div>
-  <div class="cat-banner reveal">
+  <div class="cat-banner reveal" id="free-guide">
     <img
       class="cat-banner-bg"
       src="/images/pixel-cat-text-right.webp"

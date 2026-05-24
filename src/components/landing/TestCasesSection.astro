@@ -4,10 +4,10 @@ import SectionHeading from "@/components/SectionHeading.astro";
 const cases = [
   {
     tag: "AI Docs",
-    title: "Тест-кейсы и документация",
+    title: "Карта рисков и план проверок",
     image: "/images/pixel-cat-pointing-left-v1.webp",
-    prompt: "Собери test cases и чек-лист из этого требования, оформи в готовую документацию.",
-    result: "Получаешь структуру проверок, edge cases и документацию без ручной рутины — за минуты, а не часы.",
+    prompt: "Разбери задачу с AI: что может пойти не так, какие сценарии критичны и что нельзя выпускать без проверки.",
+    result: "Получаешь понятный план проверок, а не просто список красивых тест-кейсов.",
     tools: ["ChatGPT", "Cursor", "Allure", "Markdown"],
     metrics: [
       { value: "×5", label: "быстрее документация" },
@@ -45,8 +45,8 @@ const cases = [
 <section class="section testcases-section" id="testcases">
   <SectionHeading
     eyebrow="Пример применения"
-    title="Не просто промты. Готовые сценарии под современные QA-задачи"
-    text="Показываем пользу через реальные задачи: документация с ИИ, метрики качества RAG-агентов и нагрузочное на Locust."
+    title="Не просто промты. Сценарии под реальные задачи QA"
+    text="Показываем пользу через понятные задачи: разобрать риски, проверить ответы AI, посмотреть безопасность и нагрузку."
   />
   <div class="testcase-showcase">
     {cases.map((item, index) => (
