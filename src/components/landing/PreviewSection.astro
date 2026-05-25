@@ -21,14 +21,14 @@ const facts = [
   <SectionHeading
     eyebrow="Загляни внутрь"
     titleHtml="Не покупай вслепую — <span class='accent-text'>посмотри на материал</span>"
-    text="Стиль, структура и глубина — всё видно до оплаты."
+    text="Нажми на любую страницу — откроется в полном размере."
   />
 
   <div class="preview-stage reveal">
 
-    <!-- Главное изображение -->
+    <!-- Главное изображение — кликабельное -->
     <div class="preview-main">
-      <div class="preview-frame">
+      <div class="preview-frame" id="preview-frame">
         <img
           id="preview-main-img"
           src={slides[0].src}
@@ -39,15 +39,20 @@ const facts = [
           decoding="async"
         />
         <div class="preview-badge">PDF · 30 дней</div>
+        <button class="preview-zoom-hint" id="preview-zoom-btn" type="button" aria-label="Открыть страницу в полном размере">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+          </svg>
+          Читать
+        </button>
       </div>
       <a class="button primary preview-cta" href="#pricing">
         Получить за {offers[0].price}
       </a>
     </div>
 
-    <!-- Правая панель: факты + сетка миниатюр -->
+    <!-- Правая панель -->
     <div class="preview-panel">
-
       <div class="preview-facts">
         {facts.map((f) => (
           <div class="preview-fact">
@@ -64,8 +69,9 @@ const facts = [
           <button
             class:list={["preview-thumb", { active: i === 0 }]}
             data-src={slide.src}
+            data-label={slide.label}
             role="listitem"
-            aria-label={`Показать: ${slide.label}`}
+            aria-label={`Открыть: ${slide.label}`}
             type="button"
           >
             <div class="thumb-img-wrap">
@@ -75,15 +81,24 @@ const facts = [
           </button>
         ))}
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- Лайтбокс -->
+<div class="lb-overlay" id="lb-overlay" aria-modal="true" role="dialog" aria-label="Просмотр страницы" hidden>
+  <div class="lb-inner">
+    <img class="lb-img" id="lb-img" src="" alt="" />
+    <p class="lb-label" id="lb-label"></p>
+  </div>
+  <button class="lb-close" id="lb-close" type="button" aria-label="Закрыть">✕</button>
+  <button class="lb-prev" id="lb-prev" type="button" aria-label="Предыдущая">‹</button>
+  <button class="lb-next" id="lb-next" type="button" aria-label="Следующая">›</button>
+</div>
+
 <style>
-  .preview-section {
-    overflow: hidden;
-  }
+  /* ── Section ── */
+  .preview-section { overflow: hidden; }
 
   .preview-stage {
     display: flex;
@@ -107,10 +122,11 @@ const facts = [
     width: 100%;
     border-radius: 18px;
     overflow: hidden;
+    cursor: zoom-in;
     box-shadow:
-      0 2px 0 rgba(255, 255, 255, 0.9) inset,
-      0 32px 80px rgba(23, 25, 23, 0.18),
-      0 0 0 1.5px rgba(23, 25, 23, 0.08);
+      0 2px 0 rgba(255,255,255,0.9) inset,
+      0 32px 80px rgba(23,25,23,0.18),
+      0 0 0 1.5px rgba(23,25,23,0.08);
     background: #1a1a1a;
   }
 
@@ -118,12 +134,12 @@ const facts = [
     display: block;
     width: 100%;
     height: auto;
-    transition: opacity 0.22s ease;
+    transition: opacity 0.22s ease, transform 0.22s ease;
   }
 
-  #preview-main-img.fading {
-    opacity: 0;
-  }
+  .preview-frame:hover #preview-main-img { transform: scale(1.015); }
+
+  #preview-main-img.fading { opacity: 0; }
 
   .preview-badge {
     position: absolute;
@@ -139,9 +155,34 @@ const facts = [
     border-radius: 100px;
   }
 
-  .preview-cta {
-    text-align: center;
+  .preview-zoom-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(23,25,23,0.82);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
   }
+
+  .preview-frame:hover .preview-zoom-hint {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .preview-cta { text-align: center; }
 
   /* ── Right panel ── */
   .preview-panel {
@@ -152,11 +193,7 @@ const facts = [
     gap: 1.25rem;
   }
 
-  /* Facts row */
-  .preview-facts {
-    display: flex;
-    gap: 0.75rem;
-  }
+  .preview-facts { display: flex; gap: 0.75rem; }
 
   .preview-fact {
     flex: 1;
@@ -185,7 +222,6 @@ const facts = [
     line-height: 1.3;
   }
 
-  /* Thumbnails label */
   .preview-panel-label {
     margin: 0;
     font-size: 0.72rem;
@@ -195,7 +231,6 @@ const facts = [
     color: var(--muted);
   }
 
-  /* 2×2 grid */
   .preview-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -211,19 +246,19 @@ const facts = [
     border: 1.5px solid var(--line);
     border-radius: 12px;
     padding: 6px 6px 8px;
-    cursor: pointer;
+    cursor: zoom-in;
     transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
   }
 
   .preview-thumb:hover {
-    border-color: rgba(238, 107, 58, 0.45);
+    border-color: rgba(238,107,58,0.45);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(238, 107, 58, 0.12);
+    box-shadow: 0 8px 24px rgba(238,107,58,0.12);
   }
 
   .preview-thumb.active {
     border-color: var(--orange);
-    box-shadow: 0 0 0 3px rgba(238, 107, 58, 0.15);
+    box-shadow: 0 0 0 3px rgba(238,107,58,0.15);
   }
 
   .thumb-img-wrap {
@@ -248,9 +283,7 @@ const facts = [
     color: var(--muted);
   }
 
-  .preview-thumb.active span {
-    color: var(--orange);
-  }
+  .preview-thumb.active span { color: var(--orange); }
 
   /* ── Desktop ── */
   @media (min-width: 860px) {
@@ -261,45 +294,217 @@ const facts = [
       gap: 2.5rem;
     }
 
-    .preview-main {
-      max-width: 400px;
-      flex-shrink: 0;
-    }
+    .preview-main { max-width: 400px; flex-shrink: 0; }
+    .preview-panel { max-width: 280px; flex-shrink: 0; }
+  }
 
-    .preview-panel {
-      max-width: 280px;
-      flex-shrink: 0;
-    }
+  /* ── Lightbox ── */
+  .lb-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(10,10,10,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    backdrop-filter: blur(8px);
+    animation: lb-in 0.2s ease;
+  }
+
+  .lb-overlay[hidden] { display: none; }
+
+  @keyframes lb-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .lb-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: min(680px, 92vw);
+    max-height: 92vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+  }
+
+  .lb-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    transition: opacity 0.18s ease;
+  }
+
+  .lb-img.fading { opacity: 0; }
+
+  .lb-label {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .lb-close {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    backdrop-filter: blur(4px);
+  }
+
+  .lb-close:hover { background: rgba(255,255,255,0.2); }
+
+  .lb-prev, .lb-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    backdrop-filter: blur(4px);
+    line-height: 1;
+  }
+
+  .lb-prev { left: 12px; }
+  .lb-next { right: 12px; }
+  .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.2); }
+
+  @media (min-width: 640px) {
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
   }
 </style>
 
 <script>
-  const thumbs = document.querySelectorAll<HTMLButtonElement>(".preview-thumb");
-  const mainImg = document.getElementById("preview-main-img") as HTMLImageElement | null;
-  const frame = mainImg?.closest(".preview-frame") as HTMLElement | null;
+  const slides = [
+    { src: document.querySelector<HTMLImageElement>(".preview-thumb:nth-child(1) img")?.src || "", label: "Обложка" },
+  ];
 
-  if (mainImg) {
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener("click", () => {
-        const src = thumb.dataset.src;
-        if (!src) return;
+  // Собираем slides из DOM (уже имеют правильный base-url)
+  const thumbButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(".preview-thumb"));
+  const allSlides = thumbButtons.map((btn) => ({
+    src: btn.dataset.src || "",
+    label: btn.dataset.label || "",
+  }));
 
-        thumbs.forEach((t) => t.classList.remove("active"));
-        thumb.classList.add("active");
+  const mainImg   = document.getElementById("preview-main-img") as HTMLImageElement | null;
+  const overlay   = document.getElementById("lb-overlay") as HTMLElement | null;
+  const lbImg     = document.getElementById("lb-img") as HTMLImageElement | null;
+  const lbLabel   = document.getElementById("lb-label") as HTMLElement | null;
+  const lbClose   = document.getElementById("lb-close") as HTMLButtonElement | null;
+  const lbPrev    = document.getElementById("lb-prev") as HTMLButtonElement | null;
+  const lbNext    = document.getElementById("lb-next") as HTMLButtonElement | null;
+  const zoomBtn   = document.getElementById("preview-zoom-btn") as HTMLButtonElement | null;
+  const frame     = document.getElementById("preview-frame") as HTMLElement | null;
 
+  let currentIndex = 0;
+
+  function openLightbox(index: number) {
+    if (!overlay || !lbImg || !lbLabel) return;
+    currentIndex = index;
+    lbImg.src = allSlides[index].src;
+    lbLabel.textContent = allSlides[index].label;
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    if (!overlay) return;
+    overlay.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function goTo(index: number) {
+    if (!lbImg || !lbLabel) return;
+    currentIndex = (index + allSlides.length) % allSlides.length;
+    lbImg.classList.add("fading");
+    setTimeout(() => {
+      lbImg.src = allSlides[currentIndex].src;
+      lbLabel.textContent = allSlides[currentIndex].label;
+      lbImg.classList.remove("fading");
+      // Синхронизируем активный thumb
+      thumbButtons.forEach((t, i) => t.classList.toggle("active", i === currentIndex));
+      if (mainImg) {
         mainImg.classList.add("fading");
         setTimeout(() => {
-          mainImg.src = src;
+          mainImg.src = allSlides[currentIndex].src;
           mainImg.classList.remove("fading");
         }, 220);
-
-        // На мобиле скроллим к главному изображению
-        if (window.innerWidth < 860 && frame) {
-          setTimeout(() => {
-            frame.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 50);
-        }
-      });
-    });
+      }
+    }, 180);
   }
+
+  // Клик по главному фрейму — открываем текущий слайд
+  frame?.addEventListener("click", () => openLightbox(currentIndex));
+  zoomBtn?.addEventListener("click", (e) => { e.stopPropagation(); openLightbox(currentIndex); });
+
+  // Клик по миниатюре — меняем слайд и открываем лайтбокс
+  thumbButtons.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      // Обновить главное фото
+      thumbButtons.forEach((t) => t.classList.remove("active"));
+      btn.classList.add("active");
+      currentIndex = i;
+
+      if (mainImg) {
+        mainImg.classList.add("fading");
+        setTimeout(() => {
+          mainImg.src = allSlides[i].src;
+          mainImg.classList.remove("fading");
+        }, 220);
+      }
+
+      // На мобиле — скролл к фото
+      if (window.innerWidth < 860 && frame) {
+        setTimeout(() => frame.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+      }
+
+      // Открываем лайтбокс
+      openLightbox(i);
+    });
+  });
+
+  lbClose?.addEventListener("click", closeLightbox);
+  lbPrev?.addEventListener("click", () => goTo(currentIndex - 1));
+  lbNext?.addEventListener("click", () => goTo(currentIndex + 1));
+
+  // Закрыть по клику на фон
+  overlay?.addEventListener("click", (e) => {
+    if (e.target === overlay) closeLightbox();
+  });
+
+  // Клавиатура
+  document.addEventListener("keydown", (e) => {
+    if (overlay?.hidden) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") goTo(currentIndex + 1);
+    if (e.key === "ArrowLeft")  goTo(currentIndex - 1);
+  });
 </script>

@@ -55,6 +55,13 @@ const homePath = Astro.url.pathname === "/" ? "" : "/";
 </div>
 
 <script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  if (header) {
+    const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
   const burger = document.querySelector<HTMLButtonElement>("[data-burger]");
   const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
 
