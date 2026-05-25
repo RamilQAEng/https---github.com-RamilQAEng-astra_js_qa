@@ -1,12 +1,13 @@
 ---
 import SectionHeading from "@/components/SectionHeading.astro";
+import { asset } from "@/utils/asset";
 
 const items = [
   {
     titleBefore: "План на ",
     titleAccent: "30 дней",
     meta: "практический маршрут",
-    icon: "/images/pixel-scroll.svg",
+    icon: asset("/images/pixel-scroll.svg"),
     text: "Поймешь, что учить первым, что можно отложить и как не утонуть в инструментах. Отдельно для junior, manual и middle QA.",
     size: "large",
   },
@@ -15,7 +16,7 @@ const items = [
     titleAccent: "25 промтов",
     titleAfter: " для QA",
     meta: "копируй и применяй",
-    icon: "/images/pixel-robot.svg",
+    icon: asset("/images/pixel-robot.svg"),
     text: "Не \"напиши тесты\", а нормальные запросы для требований, рисков, тестов, bug report, review ответа AI и подготовки к релизу.",
     size: "tall",
   },
@@ -24,7 +25,7 @@ const items = [
     titleAccent: "AI QA",
     titleAfter: " project",
     meta: "для портфолио",
-    icon: "/images/pixel-cv.svg",
+    icon: asset("/images/pixel-cv.svg"),
     text: "Соберешь проект, который показывает: ты умеешь не только писать test cases, но и проверять AI, риски и качество ответа.",
     size: "wide",
   },
@@ -33,7 +34,7 @@ const items = [
     titleAccent: "CV",
     titleAfter: " и собеседование",
     meta: "под рынок РФ",
-    icon: "/images/pixel-map.svg",
+    icon: asset("/images/pixel-map.svg"),
     text: "Шаблон резюме, сопроводительное письмо и ответы на вопросы, чтобы объяснить AI-навыки без пафоса и пустых слов.",
     size: "small",
   },

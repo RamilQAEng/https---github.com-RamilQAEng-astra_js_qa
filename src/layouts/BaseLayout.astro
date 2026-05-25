@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { site as defaultSite } from "@/data/site";
+import { asset } from "@/utils/asset";
 
 interface Props {
   title?: string;
@@ -34,7 +35,7 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={defaultSite.name} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={asset("/favicon.svg")} type="image/svg+xml" />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Product",
@@ -70,7 +71,7 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
         </p>
       </div>
       <div class="cookie-actions">
-        <a class="button ghost" href="/cookies/">Подробнее</a>
+        <a class="button ghost" href={asset("/cookies/")}>Подробнее</a>
         <button class="button primary" type="button" data-cookie-accept>Ок</button>
       </div>
     </div>

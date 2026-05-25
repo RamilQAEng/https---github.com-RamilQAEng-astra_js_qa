@@ -1,5 +1,6 @@
 ---
 import { leadMagnet, offers } from "@/data/site";
+import { asset } from "@/utils/asset";
 ---
 
 <section class="hero section" id="top">
@@ -19,7 +20,7 @@ import { leadMagnet, offers } from "@/data/site";
     </p>
     <div class="mobile-hero-kit" aria-label="Что внутри AI QA набора">
       <div class="mobile-hero-kit__head">
-        <img src="/images/pixel-map.svg" alt="" loading="lazy" decoding="async" />
+        <img src={asset("/images/pixel-map.svg")} alt="" loading="lazy" decoding="async" />
         <div>
           <span>Roadmap 30 дней</span>
           <strong>Первые шаги без воды</strong>
@@ -47,7 +48,7 @@ import { leadMagnet, offers } from "@/data/site";
   <div class="hero-card human-hero-card reveal delay-1" aria-label="AI QA Starter Guide — что внутри гайда">
     <div class="human-visual">
       <img
-        src="/images/image.webp"
+        src={asset("/images/image.webp")}
         alt="AI QA Starter Guide для тестировщиков: как проверять ответы AI без слепой веры — что внутри гайда"
         width="1114"
         height="1026"

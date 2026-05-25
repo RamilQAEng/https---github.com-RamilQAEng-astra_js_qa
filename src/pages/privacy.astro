@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { site } from "@/data/site";
+import { asset } from "@/utils/asset";
 ---
 
 <BaseLayout
@@ -54,7 +55,7 @@ import { site } from "@/data/site";
       <h2>6. Cookies и аналитика</h2>
       <p>
         Сайт может использовать технические cookies, localStorage и аналитические идентификаторы. Подробнее:
-        <a href="/cookies/">политика cookies</a>. Пользователь может ограничить cookies в настройках браузера.
+        <a href={asset("/cookies/")}>политика cookies</a>. Пользователь может ограничить cookies в настройках браузера.
       </p>
 
       <h2>7. Срок хранения</h2>

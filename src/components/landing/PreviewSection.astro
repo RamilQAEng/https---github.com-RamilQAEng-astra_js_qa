@@ -1,12 +1,13 @@
 ---
 import SectionHeading from "@/components/SectionHeading.astro";
 import { offers } from "@/data/site";
+import { asset } from "@/utils/asset";
 
 const slides = [
-  { src: "/images/0PDF_MAIN.webp", label: "Обложка" },
-  { src: "/images/1PDF_blog.webp", label: "Стр. 1" },
-  { src: "/images/2PDF.webp", label: "Стр. 2" },
-  { src: "/images/3PDF.webp", label: "Стр. 3" },
+  { src: asset("/images/0PDF_MAIN.webp"), label: "Обложка" },
+  { src: asset("/images/1PDF_blog.webp"), label: "Стр. 1" },
+  { src: asset("/images/2PDF.webp"), label: "Стр. 2" },
+  { src: asset("/images/3PDF.webp"), label: "Стр. 3" },
 ];
 
 const facts = [

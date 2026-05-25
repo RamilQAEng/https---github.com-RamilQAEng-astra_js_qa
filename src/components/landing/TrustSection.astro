@@ -1,10 +1,12 @@
 ---
+import { asset } from "@/utils/asset";
+
 const tools = ["ChatGPT", "API", "Playwright", "pytest", "RAG", "Locust", "DeepEval", "Postman"];
 
 const people = [
   {
     initials: "QA",
-    image: "/images/photo_2025-10-15_10-06-14.webp",
+    image: asset("/images/photo_2025-10-15_10-06-14.webp"),
     name: "Рамиль",
     role: "6 лет в QA · 1 год продакшн AI QA",
     text: "Материал собран вокруг реальных QA-задач: требования, риски, тесты, ответы AI и решение перед релизом. Без обещаний трудоустройства и магии за один вечер.",
@@ -29,7 +31,7 @@ const people = [
       </p>
     </div>
     <div class="trust-portrait">
-      <img src="/images/trust-qa-specialist-woman.webp" alt="QA-специалист за ноутбуком проверяет AI-ответы и тест-кейсы" loading="lazy" />
+      <img src={asset("/images/trust-qa-specialist-woman.webp")} alt="QA-специалист за ноутбуком проверяет AI-ответы и тест-кейсы" loading="lazy" />
       <div class="trust-portrait-card">
         <span>QA в 2026</span>
         <strong>“AI не заменяет мышление тестировщика. Он ускоряет того, кто умеет задавать вопросы и проверять ответ.”</strong>

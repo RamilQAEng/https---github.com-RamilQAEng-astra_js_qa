@@ -1,10 +1,11 @@
 ---
 import { site } from "@/data/site";
+import { asset } from "@/utils/asset";
 ---
 
 <footer class="site-footer">
   <div>
-    <a class="brand footer-brand" href="/">
+    <a class="brand footer-brand" href={asset("/")}>
       <span class="brand-mark" aria-hidden="true">
         <span>QA</span>
         <i></i>
@@ -17,11 +18,11 @@ import { site } from "@/data/site";
     <p>Практичные AI-инструменты для тестировщиков без обещаний лёгких чудес.</p>
   </div>
   <div class="footer-links">
-    <a href="/contacts/">Контакты</a>
-    <a href="/privacy/">Политика</a>
-    <a href="/offer/">Оферта</a>
-    <a href="/refund/">Возврат</a>
-    <a href="/cookies/">Cookies</a>
+    <a href={asset("/contacts/")}>Контакты</a>
+    <a href={asset("/privacy/")}>Политика</a>
+    <a href={asset("/offer/")}>Оферта</a>
+    <a href={asset("/refund/")}>Возврат</a>
+    <a href={asset("/cookies/")}>Cookies</a>
     <a href={site.telegramUrl}>Telegram</a>
     <a href={site.vkUrl}>VK</a>
     <a href={`mailto:${site.supportEmail}`}>Поддержка</a>

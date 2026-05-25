@@ -1,6 +1,7 @@
 ---
 import SectionHeading from "@/components/SectionHeading.astro";
 import { leadMagnet, offers } from "@/data/site";
+import { asset } from "@/utils/asset";
 ---
 
 <section class="section" id="pricing">
@@ -13,7 +14,7 @@ import { leadMagnet, offers } from "@/data/site";
     {offers.map((offer) => (
       <article class:list={["price-card paid-price-card reveal", { highlighted: offer.highlighted }]}>
         <div class="price-card-top">
-          <img class="coin-icon" src="/images/pixel-coin.svg" alt="" loading="lazy" />
+          <img class="coin-icon" src={asset("/images/pixel-coin.svg")} alt="" loading="lazy" />
           {offer.highlighted && <span class="badge">Рекомендуемый</span>}
         </div>
         <div>
@@ -29,7 +30,7 @@ import { leadMagnet, offers } from "@/data/site";
         </ul>
         <a
           class="button primary full paid-tariff-button"
-          href={offer.checkoutUrl}
+          href={asset(offer.checkoutUrl)}
           data-goal={offer.goalId}
           data-plan={offer.id}
         >
@@ -41,7 +42,7 @@ import { leadMagnet, offers } from "@/data/site";
   <div class="cat-banner reveal" id="free-guide">
     <img
       class="cat-banner-bg"
-      src="/images/pixel-cat-text-right.webp"
+      src={asset("/images/pixel-cat-text-right.webp")}
       alt="Пиксельный кот-QA с баг-репортом и инструментами тестирования"
       loading="lazy"
       decoding="async"
@@ -52,7 +53,7 @@ import { leadMagnet, offers } from "@/data/site";
       <p>{leadMagnet.description}</p>
       <a
         class="button primary"
-        href={leadMagnet.href}
+        href={asset(leadMagnet.href)}
         data-goal={leadMagnet.goalId}
         download
       >
