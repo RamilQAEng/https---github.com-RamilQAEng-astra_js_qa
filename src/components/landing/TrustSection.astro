@@ -1,18 +1,19 @@
 ---
-const tools = ["ChatGPT", "API", "Playwright", "pytest", "RAG", "Locust"];
+const tools = ["ChatGPT", "API", "Playwright", "pytest", "RAG", "Locust", "DeepEval", "Postman"];
 
 const people = [
   {
     initials: "QA",
-    name: "Автор проекта",
-    role: "QA-практик и редактор материалов",
-    text: "Собирает материалы вокруг реальных задач: требования, риски, тесты, ответы AI и решение перед релизом.",
+    image: "/images/photo_2025-10-15_10-06-14.webp",
+    name: "Рамиль",
+    role: "6 лет в QA · 1 год продакшн AI QA",
+    text: "Материал собран вокруг реальных QA-задач: требования, риски, тесты, ответы AI и решение перед релизом. Без обещаний трудоустройства и магии за один вечер.",
   },
   {
     initials: "AI",
     name: "AI-ассистент",
     role: "Помощник, не автопилот",
-    text: "Помогает быстро собрать черновики, но финальный scope, review, метрики и решение остаются за QA.",
+    text: "Помогает быстро собрать черновики, но финальный scope, review, метрики, риски и решение остаются за QA. В этом и смысл набора.",
   },
 ];
 ---
@@ -21,17 +22,29 @@ const people = [
   <div class="trust-panel reveal">
     <div class="trust-head">
       <p class="eyebrow">Кто за этим стоит</p>
-      <h2>Не “огромная команда”, а понятный авторский продукт</h2>
+      <h2>Не “огромная команда”, а понятный авторский продукт для <span class="accent-text">QA из РФ</span></h2>
       <p>
-        Ты видишь, кто отвечает за материал. Набор собран вокруг реальной QA-практики:
-        требований, тестов, AI-ответов, рисков и решений перед релизом — а не вокруг красивой упаковки.
+        Ты видишь, кто отвечает за материал и как он собран. Набор сделан под реальные сценарии русскоязычного QA:
+        hh-резюме, собеседования, ручное тестирование, первые AI-проверки, портфолио и спокойный переход без паники.
       </p>
+    </div>
+    <div class="trust-portrait">
+      <img src="/images/trust-qa-specialist-woman.webp" alt="QA-специалист за ноутбуком проверяет AI-ответы и тест-кейсы" loading="lazy" />
+      <div class="trust-portrait-card">
+        <span>QA в 2026</span>
+        <strong>“AI не заменяет мышление тестировщика. Он ускоряет того, кто умеет задавать вопросы и проверять ответ.”</strong>
+        <p>В наборе весь фокус на этом: не слепо верить ChatGPT, а управлять им как инструментом QA.</p>
+      </div>
     </div>
     <div class="people-row">
       {people.map((person) => (
         <article class="person-card">
           <div class="person-avatar">
-            <span>{person.initials}</span>
+            {person.image ? (
+              <img src={person.image} alt="Автор проекта" loading="lazy" />
+            ) : (
+              <span>{person.initials}</span>
+            )}
           </div>
           <div>
             <h3>{person.name}</h3>

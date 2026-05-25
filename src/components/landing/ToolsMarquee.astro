@@ -1,0 +1,42 @@
+---
+const tools = [
+  "ChatGPT",
+  "Playwright",
+  "pytest",
+  "Locust",
+  "Postman",
+  "RAG",
+  "DeepEval",
+  "Ragas",
+  "API tests",
+  "Bug report",
+  "Test case",
+  "CV review",
+];
+
+const stats = [
+  { value: 5, prefix: "x", label: "быстрее черновик тест-кейсов, если дать AI нормальный контекст" },
+  { value: 0, label: "пустых тест-кейсов в цели: каждый пункт привязан к риску" },
+  { value: 30, suffix: " дней", label: "понятный roadmap без хаотичного изучения всего подряд" },
+];
+---
+
+<section class="trend-strip" aria-label="Инструменты и быстрые ориентиры набора">
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[...tools, ...tools].map((tool) => <span>{tool}</span>)}
+    </div>
+  </div>
+  <div class="trend-stats">
+    {stats.map((item) => (
+      <article class="trend-stat reveal">
+        <strong>
+          {item.prefix && <span>{item.prefix}</span>}
+          <span class="count-up" data-count={item.value}>0</span>
+          {item.suffix && <span>{item.suffix}</span>}
+        </strong>
+        <p>{item.label}</p>
+      </article>
+    ))}
+  </div>
+</section>

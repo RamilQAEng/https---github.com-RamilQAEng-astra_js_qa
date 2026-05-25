@@ -51,6 +51,15 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
   </head>
   <body>
     <slot />
+    <a
+      class="floating-sale"
+      href="#pricing"
+      data-goal="sale_timer_pricing"
+      aria-label="Скидка до 30 июня, перейти к тарифам"
+    >
+      <span>Скидка до 30.06</span>
+      <strong data-countdown="2026-06-30T23:59:59+03:00">36д 00ч</strong>
+    </a>
     <a class="back-to-top" href="#top" aria-label="Наверх">↑</a>
     <div class="cookie-banner" data-cookie-banner hidden>
       <div>
@@ -97,6 +106,42 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
         revealItems.forEach(show);
       }
 
+      const countItems = document.querySelectorAll(".count-up");
+      const animateCount = (el) => {
+        if (el.dataset.done === "yes") return;
+        el.dataset.done = "yes";
+        const target = Number(el.dataset.count || "0");
+        const duration = 900;
+        const started = performance.now();
+
+        const tick = (now) => {
+          const progress = Math.min((now - started) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+      };
+
+      if ("IntersectionObserver" in window) {
+        const countObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateCount(entry.target);
+                countObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.35 },
+        );
+
+        countItems.forEach((item) => countObserver.observe(item));
+      } else {
+        countItems.forEach(animateCount);
+      }
+
       const cookieBanner = document.querySelector("[data-cookie-banner]");
       const cookieAccept = document.querySelector("[data-cookie-accept]");
       const cookieKey = "qaai_cookie_notice_accepted";
@@ -109,6 +154,26 @@ const pageTitle = title === defaultSite.name ? title : `${title} | ${defaultSite
         localStorage.setItem(cookieKey, "yes");
         if (cookieBanner) cookieBanner.hidden = true;
       });
+
+      const countdownItems = document.querySelectorAll("[data-countdown]");
+      const padTime = (value) => String(value).padStart(2, "0");
+      const updateCountdowns = () => {
+        countdownItems.forEach((item) => {
+          const deadline = new Date(item.dataset.countdown || "").getTime();
+          if (!Number.isFinite(deadline)) return;
+
+          const left = Math.max(0, deadline - Date.now());
+          const days = Math.floor(left / 86400000);
+          const hours = Math.floor((left % 86400000) / 3600000);
+
+          item.textContent = left > 0 ? `${days}д ${padTime(hours)}ч` : "финал";
+        });
+      };
+
+      if (countdownItems.length) {
+        updateCountdowns();
+        setInterval(updateCountdowns, 60000);
+      }
     </script>
   </body>
 </html>

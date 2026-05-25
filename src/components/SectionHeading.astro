@@ -1,15 +1,16 @@
 ---
 interface Props {
   eyebrow?: string;
-  title: string;
+  title?: string;
+  titleHtml?: string;
   text?: string;
 }
 
-const { eyebrow, title, text } = Astro.props;
+const { eyebrow, title, titleHtml, text } = Astro.props;
 ---
 
 <div class="section-heading reveal">
   {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-  <h2>{title}</h2>
+  {titleHtml ? <h2 set:html={titleHtml} /> : <h2>{title}</h2>}
   {text && <p>{text}</p>}
 </div>
