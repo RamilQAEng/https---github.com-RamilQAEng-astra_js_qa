@@ -272,8 +272,7 @@ body {
   font-weight: 650;
 }
 
-.site-header nav a:hover,
-.footer-links a:hover {
+.site-header nav a:hover {
   color: var(--text);
 }
 
@@ -1494,65 +1493,26 @@ body.menu-open .mobile-menu-panel {
   }
 }
 
-.site-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 28px;
-  width: min(var(--max), calc(100% - 36px));
-  margin: 0 auto;
-  padding: 42px 0 58px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-}
-
-.footer-brand {
-  margin-bottom: 14px;
-  color: var(--text);
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-content: start;
-  justify-content: flex-end;
-  font-weight: 650;
-}
-
 .dev-credit {
-  align-self: start;
   display: inline-flex;
-  gap: 9px;
+  gap: 8px;
   align-items: center;
-  width: max-content;
-  padding: 10px 12px;
+  padding: 8px 12px;
   border: 1px solid rgba(143, 207, 154, 0.26);
   border-radius: 999px;
-  background: rgba(255, 253, 247, 0.66);
-  color: var(--text);
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 800;
-  box-shadow: 0 14px 34px rgba(16, 18, 15, 0.06);
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease;
+  font-weight: 700;
+  transition: opacity 0.18s ease;
 }
 
-.dev-credit:hover {
-  transform: translateY(-2px);
-  border-color: rgba(143, 207, 154, 0.5);
-  background: rgba(255, 253, 247, 0.9);
-}
+.dev-credit:hover { opacity: 0.8; }
 
 .dev-credit-dot {
-  position: relative;
-  width: 9px;
-  height: 9px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 0 4px rgba(143, 207, 154, 0.18);
+  flex-shrink: 0;
 }
 
 .dev-credit-dot::after {
@@ -2605,7 +2565,6 @@ body.menu-open .mobile-menu-panel {
 
   .hero-actions,
   .final-cta,
-  .site-footer,
   .soft-cta {
     flex-direction: column;
     align-items: stretch;
@@ -2744,9 +2703,6 @@ body.menu-open .mobile-menu-panel {
     height: 124px;
   }
 
-  .footer-links {
-    justify-content: flex-start;
-  }
 
   .dev-credit {
     align-self: flex-start;

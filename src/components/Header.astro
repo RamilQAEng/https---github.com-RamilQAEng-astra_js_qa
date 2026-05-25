@@ -1,7 +1,10 @@
 ---
 import { navigation, site } from "@/data/site";
+import { asset } from "@/utils/asset";
 
-const homePath = Astro.url.pathname === "/" ? "" : "/";
+const base = import.meta.env.BASE_URL; // "/" locally, "/repo-name/" on Pages
+const isHome = Astro.url.pathname === base || Astro.url.pathname === base.replace(/\/$/, "");
+const homePath = isHome ? "" : asset("/");
 ---
 
 <header class="site-header">
